@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+
+  "name": "7th Cavalry Zulu Conversion Display",
+  "description": "Adds local time conversion after Zulu times on 7cav.us.",
+  "version": "1.0",
+  
+  "icons": { "16": "icon16.png",
+           "48": "icon48.png",
+          "128": "icon128.png" },
+  
+  "background" : {
+    "scripts" : ["background.js"] 
+  },
+
+  "content_scripts" : [
+    {
+      "matches" : ["https://7cav.us/*"],
+      "js" : ["zulu.js"],
+      "run_at" : "document_end"
+    }
+  ],
+
+  "permissions" : [
+    "https://7cav.us/",
+    "storage"
+  ],
+
+  "options_ui" : {
+    "page" : "options.html",
+    "chrome_style": true
+  }
+  
+}
