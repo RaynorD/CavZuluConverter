@@ -28,7 +28,7 @@ function handleText(textNode) {
 }
 
 function appendTimezone(match) {
-  var newTime = Number(match.replace("Z","")) + (timezoneOffset * 100);
+  var newTime = Number(match.replace("Z","").replace("z","")) + (timezoneOffset * 100);
   
   if(newTime > 2400) {newTime -= 2400};
   if(newTime < 0) {newTime += 2400};
