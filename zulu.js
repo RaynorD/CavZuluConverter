@@ -50,6 +50,9 @@ chrome.runtime.sendMessage(
   function(response) {
     console.log("response.farewell: " + response.farewell);
     timezoneLabel = response.farewell;
+    if(timezoneLabel == undefined) {
+       timezoneLabel = ""
+    }
 
     walk(document.body);
   }
