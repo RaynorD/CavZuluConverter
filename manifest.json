@@ -3,7 +3,7 @@
 
   "name": "7th Cavalry Zulu Conversion Display",
   "description": "Adds local time conversion after Zulu times on 7cav.us.",
-  "version": "1.0.1",
+  "version": "1.1.0",
   
   "icons": { "16": "icon16.png",
            "48": "icon48.png",
