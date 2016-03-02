@@ -1,4 +1,4 @@
-# CavZuluConverter-Chrome
+# 7th Cavalry Zulu Conversion Display
 
 This extension appends a conversion to your local timezone after any zulu times displayed on 7cav.us. It supports all common formatting for the time: with or without a colon or space, Z or Zulu.
 
