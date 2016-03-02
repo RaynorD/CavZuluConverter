@@ -24,18 +24,39 @@ function walk(node) {
 }
 
 function handleText(textNode) {
-  textNode.nodeValue = textNode.nodeValue.replace(/(\d{4}Z)/gi, appendTimezone);
+  textNode.nodeValue = textNode.nodeValue.replace(/(\d{2}:?\d{2}(?: Zulu(?=\W|$)|Zulu(?=\W|$)|Z(?=\W|$)| Z(?=\W|$)))/gi, appendTimezone);
 }
 
 function appendTimezone(match) {
-  var newTime = Number(match.replace("Z","").replace("z","")) + (timezoneOffset * 100);
+  var oldText = match;
+  
+  var hasColon = (oldText.indexOf(':') > -1);
+  if(hasColon) {
+     oldText = oldText.replace(":","");
+  }
+  
+  var hasSpace = (oldText.indexOf(" ") === 4);
+  
+  var timeRegex = /^\d{4}/;
+  var oldTime = Number(timeRegex.exec(match));
+
+  var newTime = oldTime - (timezoneOffset * 100);
   
   if(newTime > 2400) {newTime -= 2400};
   if(newTime < 0) {newTime += 2400};
   
   newTime = pad(newTime, 4);
   
-  var newString = match.concat(" (", newTime, timezoneLabel, ")");
+  if(hasColon) {
+    newTime = (newTime.slice(0,2) + ":" + newTime.slice(2));
+  }
+  
+  var spacePad = "";
+  if(hasSpace) {
+    spacePad = " ";
+  }
+  
+  var newString = match.concat(" (", newTime, spacePad, timezoneLabel, ")");
   return newString;
 }
 
@@ -48,7 +69,6 @@ timezoneOffset = (offset / 60)
 chrome.runtime.sendMessage(
   "getTimezoneLabel", 
   function(response) {
-    console.log("response.farewell: " + response.farewell);
     timezoneLabel = response.farewell;
     if(timezoneLabel == undefined) {
        timezoneLabel = ""
@@ -57,6 +77,3 @@ chrome.runtime.sendMessage(
     walk(document.body);
   }
 );
-
-
-
