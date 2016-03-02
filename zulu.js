@@ -38,7 +38,7 @@ function appendTimezone(match) {
   var hasSpace = (oldText.indexOf(" ") === 4);
   
   var timeRegex = /^\d{4}/;
-  var oldTime = Number(timeRegex.exec(match));
+  var oldTime = Number(timeRegex.exec(oldText));
 
   var newTime = oldTime - (timezoneOffset * 100);
   
