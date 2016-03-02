@@ -51,9 +51,9 @@ function appendTimezone(match) {
     newTime = (newTime.slice(0,2) + ":" + newTime.slice(2));
   }
   
-  var spacePad = "";
-  if(hasSpace) {
-    spacePad = " ";
+  var spacePad = " ";
+  if(!hasSpace || (timezoneLabel == "")) {
+    spacePad = "";
   }
   
   var newString = match.concat(" (", newTime, spacePad, timezoneLabel, ")");
